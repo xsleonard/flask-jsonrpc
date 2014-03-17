@@ -212,9 +212,10 @@ class JSONRPC(object):
 
     def init_app(self, app):
         self.app = app
+        self._register_blueprint(self.app)
         self._register_browse(self.app)
 
-    def register_blueprint(self, bp):
+    def _register_blueprint(self, bp):
         bp.add_url_rule(self.service_url, self._unique_name(), self.site_api,
                         methods=['POST'])
         bp.add_url_rule(self.service_url + '/<method>',
